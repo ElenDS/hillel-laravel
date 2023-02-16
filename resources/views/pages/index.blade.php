@@ -1,9 +1,21 @@
 @extends('layouts.main')
 
-@section('header')
-@endsection
-
 @section('main')
-    <p class="text-center fs-2 pt-2">Make a choice, please!</p>
-<div class="w-100 p-3 fs-1 text-center"><a class="p-3 mb-2 text-uppercase" href="/list-categories">Categories</a> or <a class="p-3 mb-2 text-uppercase" href="/list-tags">Tags</a></div>
+    <section class="h-100 d-flex mt-5 justify-content-center">
+    <form>
+
+        <div class="form-outline">
+            <input type="email" id="form2Example1" class="form-control" />
+            <label class="form-label" for="form2Example1">Email address</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="password" id="form2Example2" class="form-control" />
+            <label class="form-label" for="form2Example2">Password</label>
+        </div>
+
+        <button type="button" class="btn btn-info btn-block mb-4">Sign in</button>
+
+    </form>
+    </section>
 @endsection

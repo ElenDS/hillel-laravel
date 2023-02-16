@@ -17,8 +17,8 @@
             <tr class="w-4">
                 <th scope="row">{{$tag->id}}</th>
                 <td>{{$tag->name}}</td>
-                <td><a href="/update-tag/?id={{$tag->id}}">Edit</a></td>
-                <td><a href="/delete-tag/?id={{$tag->id}}">Delete</a></td>
+                <td><a href="/update-tag/{{$tag->id}}">Edit</a></td>
+                <td><a href="/delete-tag/{{$tag->id}}">Delete</a></td>
             </tr>
 
         @endforeach

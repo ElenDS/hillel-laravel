@@ -9,14 +9,11 @@ use Illuminate\Support\Facades\DB;
 class PostTagTableSeeder extends Seeder
 {
     static $postTags = [
-        [1, 1],
-        [1, 4],
-        [3, 2],
+        [1, 2],
         [2, 1],
         [2, 3],
-        [4, 3],
-        [5, 3],
-        [5, 4]
+        [3, 1],
+        [3, 4]
     ];
 
     /**

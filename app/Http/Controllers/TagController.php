@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -18,32 +19,35 @@ class TagController extends Controller
         return view('pages.create-tag');
     }
 
-    public function processFormNewTag(Request $request)
+    public function processFormNewTag(TagRequest $request)
     {
         $newTag = new Tag();
         $newTag->name = $request->input('name');
         $newTag->save();
+
+        session()->flash('message', 'Tag successfully created');
+
         return redirect('/list-tags');
     }
 
-    public function deleteTag($id)
+    public function deleteTag(Tag $tag)
     {
-        $tag = Tag::find($id);
         $tag->delete();
         return redirect('/list-tags');
     }
 
-    public function updateTag($id)
+    public function updateTag(Tag $tag)
     {
-        $tag = Tag::find($id);
         return view('pages.update-tag', ['tag' => $tag]);
     }
 
-    public function processFormUpdateTag(Request $request)
+    public function processFormUpdateTag(TagRequest $request, Tag $tag)
     {
-        $tag = Tag::find($request->input('id'));
         $tag->name = $request->input('name');
         $tag->save();
+
+        session()->flash('message', 'Tag successfully updated');
+
         return redirect('/list-tags');
     }
 

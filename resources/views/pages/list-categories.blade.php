@@ -2,6 +2,11 @@
 
 @section('main')
     <h1 class="text-center">Categories</h1>
+    @if(session()->has('message'))
+        <div class="alert alert-success m-3">
+            {{session('message')}}
+        </div>
+    @endif
     <table class="table mt-3">
         <thead>
         <tr>

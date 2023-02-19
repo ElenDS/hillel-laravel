@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -18,33 +19,35 @@ class CategoryController extends Controller
         return view('pages.create-category');
     }
 
-    public function processFormNewCategory(Request $request)
+    public function processFormNewCategory(CategoryRequest $request)
     {
         $newCategory = new Category();
         $newCategory->name = $request->input('name');
         $newCategory->save();
+
+        session()->flash('message', 'Category successfully created');
+
         return redirect('/list-categories');
     }
 
-    public function deleteCategory($id)
+    public function deleteCategory(Category $category)
     {
-        $category = Category::find($id);
         $category->delete();
         return redirect('/list-categories');
     }
 
-    public function updateCategory($id)
+    public function updateCategory(Category $category)
     {
-        $category = Category::find($id);
         return view('pages.update-category', ['category' => $category]);
     }
 
-    public function processFormUpdateCategory(Request $request)
+    public function processFormUpdateCategory(CategoryRequest $request, Category $category)
     {
-        $category = Category::find($request->input('id'));
         $category->name = $request->input('name');
         $category->save();
+
+        session()->flash('message', 'Category successfully updated');
+
         return redirect('/list-categories');
     }
-
 }

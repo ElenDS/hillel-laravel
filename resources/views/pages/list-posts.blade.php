@@ -10,14 +10,20 @@
     <div class="container">
         @foreach($posts as $post)
             <div class="text text-2 p-4">
-                <div class="d-inline">
-                <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-outline-info">Edit</a>
-                <form method="post" action="/admin/posts/{{$post->id}}">
-                    <input name="_method" value="delete" type="hidden">
-                    @csrf
-                    <input name="id" value="{{$post->id}}" type="hidden">
-                    <button type="submit" class="btn btn-outline-info">Delete</button>
-                </form>
+                <div class="row w-50">
+                    <div class="col-3">
+                        <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-outline-info">Edit Post</a>
+                    </div>
+
+                    <div class="col-3">
+                        <form method="post" action="/admin/posts/{{$post->id}}">
+                            <input name="_method" value="delete" type="hidden">
+                            @csrf
+                            <input name="id" value="{{$post->id}}" type="hidden">
+                            <button type="submit" class="btn btn-outline-info">Delete Post</button>
+                        </form>
+                    </div>
+
                 </div>
                 <h2 class="my-3">{{$post->title}}</h2>
                 <div>

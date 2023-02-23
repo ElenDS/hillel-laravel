@@ -11,11 +11,13 @@ class User extends Authenticatable
     use HasFactory;
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password',
+        'remember_token'
     ];
 
     protected $fillable = [
-        'email', 'password'
+        'email',
+        'password'
     ];
 
     public function setPasswordAttribute($value)

@@ -56,8 +56,7 @@ class PostController extends Controller
         $post->text = $request->input('text');
         $post->category_id = $request->input('category_id');
         $post->save();
-        $post->tags()->detach();
-        $post->tags()->attach($request->input('tags'));
+        $post->tags()->sync($request->input('tags'));
 
         session()->flash('message', 'Post successfully updated');
 

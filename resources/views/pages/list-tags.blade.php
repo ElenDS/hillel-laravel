@@ -22,12 +22,21 @@
             <tr class="w-4">
                 <th scope="row">{{$tag->id}}</th>
                 <td>{{$tag->name}}</td>
-                <td><a href="/update-tag/{{$tag->id}}">Edit</a></td>
-                <td><a href="/delete-tag/{{$tag->id}}">Delete</a></td>
+                <td>
+                    <a href="/admin/tags/{{$tag->id}}/edit" class="btn btn-outline-info">Edit</a>
+                </td>
+                <td>
+                    <form method="post" action="/admin/tags/{{$tag->id}}">
+                        <input name="_method" value="delete" type="hidden">
+                        @csrf
+                        <input name="id" value="{{$tag->id}}" type="hidden">
+                        <button type="submit" class="btn btn-outline-info">Delete</button>
+                    </form>
+                </td>
             </tr>
 
         @endforeach
         </tbody>
     </table>
-    <a class="m-4 btn btn-info" href="/create-tag">Create New</a>
+    <a class="m-4 btn btn-info" href="{{route('tags.create')}}">Create New</a>
 @endsection

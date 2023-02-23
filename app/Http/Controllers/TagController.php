@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    public function listTags()
+    public function index()
     {
         $tags = Tag::all();
         return view('pages.list-tags', ['tags' => $tags]);
     }
 
-    public function createTag()
+    public function create()
     {
         return view('pages.create-tag');
     }
 
-    public function processFormNewTag(TagRequest $request)
+    public function store(TagRequest $request)
     {
         $newTag = new Tag();
         $newTag->name = $request->input('name');
@@ -27,28 +27,28 @@ class TagController extends Controller
 
         session()->flash('message', 'Tag successfully created');
 
-        return redirect('/list-tags');
+        return redirect('admin/tags');
     }
 
-    public function deleteTag(Tag $tag)
+    public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect('/list-tags');
+        return redirect('admin/tags');
     }
 
-    public function updateTag(Tag $tag)
+    public function edit(Tag $tag)
     {
         return view('pages.update-tag', ['tag' => $tag]);
     }
 
-    public function processFormUpdateTag(TagRequest $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
         $tag->name = $request->input('name');
         $tag->save();
 
         session()->flash('message', 'Tag successfully updated');
 
-        return redirect('/list-tags');
+        return redirect('admin/tags');
     }
 
 }

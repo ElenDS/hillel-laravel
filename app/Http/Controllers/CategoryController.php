@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function listCategories()
+    public function index()
     {
         $categories = Category::all();
         return view('pages.list-categories', ['categories' => $categories]);
     }
 
-    public function createCategory()
+    public function create()
     {
         return view('pages.create-category');
     }
 
-    public function processFormNewCategory(CategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
         $newCategory = new Category();
         $newCategory->name = $request->input('name');
@@ -27,27 +27,27 @@ class CategoryController extends Controller
 
         session()->flash('message', 'Category successfully created');
 
-        return redirect('/list-categories');
+        return redirect('admin/categories');
     }
 
-    public function deleteCategory(Category $category)
+    public function destroy(Category $category)
     {
         $category->delete();
-        return redirect('/list-categories');
+        return redirect('admin/categories');
     }
 
-    public function updateCategory(Category $category)
+    public function edit(Category $category)
     {
         return view('pages.update-category', ['category' => $category]);
     }
 
-    public function processFormUpdateCategory(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         $category->name = $request->input('name');
         $category->save();
 
         session()->flash('message', 'Category successfully updated');
 
-        return redirect('/list-categories');
+        return redirect('admin/categories');
     }
 }

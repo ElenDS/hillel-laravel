@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
 @section('main')
-    <form action="/update-category/{{$category->id}}" method="post" class="m-5">
+    <form action="/admin/categories/{{$category->id}}" method="post" class="m-5">
+        <input name="_method" value="put" type="hidden">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">

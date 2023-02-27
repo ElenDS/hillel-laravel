@@ -9,14 +9,14 @@
                 <ul class="navbar-nav">
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link" href="{{route('login')}}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/registration">Register</a>
+                            <a class="nav-link" href="{{route('registration')}}">Register</a>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">Logout</a>
+                            <a class="nav-link" href="{{route('logout')}}">Logout</a>
                         </li>
                     @endguest
                 </ul>

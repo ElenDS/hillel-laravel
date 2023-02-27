@@ -13,7 +13,17 @@ class Post extends Illuminate\Database\Eloquent\Model
         return $this->belongsTo('App\Models\Category');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function tags() {
         return $this->belongsToMany('App\Models\Tag');
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

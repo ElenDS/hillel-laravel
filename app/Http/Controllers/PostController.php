@@ -10,20 +10,20 @@ use App\Models\Tag;
 
 class PostController extends Controller
 {
-    public function showPosts()
+    public function index()
     {
         $posts = Post::all();
-        return view('pages.index', ['posts' => $posts]);
+        return view('pages.list-posts', ['posts' => $posts]);
     }
 
-    public function createPost()
+    public function create()
     {
         $categories = Category::all();
         $tags = Tag::all();
         return view('pages.create-post', ['categories' => $categories, 'tags' => $tags]);
     }
 
-    public function processFormNewPost(PostRequest $request)
+    public function store(PostRequest $request)
     {
         $newPost = new Post();
         $newPost->title = $request->input('title');
@@ -34,34 +34,33 @@ class PostController extends Controller
 
         session()->flash('message', 'Post successfully created');
 
-        return redirect('/');
+        return redirect('admin/posts');
     }
 
-    public function deletePost(Post $post)
+    public function destroy(Post $post)
     {
         $post->delete();
-        return redirect('/');
+        return redirect('admin/posts');
     }
 
-    public function updatePost(Post $post)
+    public function edit(Post $post)
     {
         $categories = Category::all();
         $tags = Tag::all();
         return view('pages.update-post', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
-    public function processFormUpdatePost(PostRequest $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         $post->title = $request->input('title');
         $post->text = $request->input('text');
         $post->category_id = $request->input('category_id');
         $post->save();
-        $post->tags()->detach();
-        $post->tags()->attach($request->input('tags'));
+        $post->tags()->sync($request->input('tags'));
 
         session()->flash('message', 'Post successfully updated');
 
-        return redirect('/');
+        return redirect('admin/posts');
     }
 
 }

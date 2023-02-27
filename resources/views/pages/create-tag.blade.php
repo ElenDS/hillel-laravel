@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main')
-    <form action="/create-tag" method="post" class="m-5">
+    <form action="/admin/tags" method="post" class="m-5">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">

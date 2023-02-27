@@ -2,7 +2,7 @@
 
 @section('main')
     <div class="container d-block">
-        <form action="/create-post" method="post" class="m-5">
+        <form action="/admin/posts" method="post" class="m-5">
             @csrf
             <div class="form-group pb-3">
                 @error('title')
@@ -27,12 +27,13 @@
 
             @foreach($categories as $category)
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" value="{{$category->id}}" id="{{$category->name}}" name="category_id">
-                <label class="form-check-label" for="{{$category->name}}">
-                    {{$category->name}}
-                </label>
-            </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="{{$category->id}}" id="{{$category->name}}"
+                           name="category_id">
+                    <label class="form-check-label" for="{{$category->name}}">
+                        {{$category->name}}
+                    </label>
+                </div>
             @endforeach
 
             <h4 class="mt-3">Select tags</h4>
@@ -44,7 +45,8 @@
             @foreach($tags as $tag)
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="{{$tag->name}}" name="tags[]">
+                    <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="{{$tag->name}}"
+                           name="tags[]">
                     <label class="form-check-label" for="{{$tag->name}}">
                         {{$tag->name}}
                     </label>

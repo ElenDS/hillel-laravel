@@ -14,39 +14,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\PostController::class, 'showPosts']);
+Route::get('/', [\App\Http\Controllers\Controller::class, 'show']);
 
-Route::get('/list-categories', [\App\Http\Controllers\CategoryController::class, 'listCategories']);
+Route::get('/admin', [\App\Http\Controllers\AuthController::class, 'checkAuth']);
 
-Route::get('/create-category', [\App\Http\Controllers\CategoryController::class, 'createCategory']);
+Route::prefix('admin')->group(function () {
+    Route::resource('categories',\App\Http\Controllers\CategoryController::class)->middleware('auth');
+    Route::resource('tags',\App\Http\Controllers\TagController::class)->middleware('auth');
+    Route::resource('posts',\App\Http\Controllers\PostController::class)->middleware('auth');
+});
 
-Route::post('/create-category',[\App\Http\Controllers\CategoryController::class, 'processFormNewCategory']);
+Route::middleware('guest')->group(function(){
+    Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'handleLogin']);
+    Route::get('/registration', [\App\Http\Controllers\AuthController::class, 'registration']);
+    Route::post('/registration', [\App\Http\Controllers\AuthController::class, 'handleRegistration']);
+});
 
-Route::get('/delete-category/{category}', [\App\Http\Controllers\CategoryController::class, 'deleteCategory']);
-
-Route::get('/update-category/{category}',[\App\Http\Controllers\CategoryController::class, 'updateCategory']);
-
-Route::post('/update-category/{category}', [\App\Http\Controllers\CategoryController::class, 'processFormUpdateCategory']);
-
-Route::get('/list-tags', [\App\Http\Controllers\TagController::class, 'listTags']);
-
-Route::get('/create-tag', [\App\Http\Controllers\TagController::class, 'createTag']);
-
-Route::post('/create-tag',[\App\Http\Controllers\TagController::class, 'processFormNewTag']);
-
-Route::get('/delete-tag/{tag}', [\App\Http\Controllers\TagController::class, 'deleteTag']);
-
-Route::get('/update-tag/{tag}',[\App\Http\Controllers\TagController::class, 'updateTag']);
-
-Route::post('/update-tag/{tag}', [\App\Http\Controllers\TagController::class, 'processFormUpdateTag']);
-
-Route::get('/create-post', [\App\Http\Controllers\PostController::class, 'createPost']);
-
-Route::post('/create-post',[\App\Http\Controllers\PostController::class, 'processFormNewPost']);
-
-Route::get('/delete-post/{post}',[\App\Http\Controllers\PostController::class, 'deletePost']);
-
-Route::get('/update-post/{post}',[\App\Http\Controllers\PostController::class, 'updatePost']);
-
-Route::post('/update-post/{post}', [\App\Http\Controllers\PostController::class, 'processFormUpdatePost']);
+Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 

@@ -2,7 +2,7 @@
 
 @section('main')
     <div class="main w-50">
-   <form action="/create-category" method="post" class="m-5">
+   <form action="/admin/categories" method="post" class="m-5">
        @csrf
        @if ($errors->any())
            <div class="alert alert-danger">

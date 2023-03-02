@@ -210,7 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Geo' => \App\Helpers\Facades\MaxMind::class,
+        'MaxMind' => \App\Helpers\Facades\MaxMind::class,
     ])->toArray(),
 
 ];

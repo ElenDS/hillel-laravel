@@ -18,6 +18,8 @@ Route::get('/', [\App\Http\Controllers\Controller::class, 'show']);
 
 Route::get('/admin', [\App\Http\Controllers\AuthController::class, 'checkAuth']);
 
+Route::get('/maxmind', [\App\Http\Controllers\Controller::class, 'showMaxmind']);
+
 Route::prefix('admin')->group(function () {
     Route::resource('categories',\App\Http\Controllers\CategoryController::class)->middleware('auth');
     Route::resource('tags',\App\Http\Controllers\TagController::class)->middleware('auth');

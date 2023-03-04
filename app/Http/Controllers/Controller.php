@@ -21,9 +21,9 @@ class Controller extends BaseController
 
     public function showMaxmind()
     {
-        $country = MaxMind::country('178.54.128.150');
-        $city = MaxMind::city('178.54.128.150');
-        $code = MaxMind::code('178.54.128.150');
+        $country = MaxMind::mmCountry('178.54.128.150');
+        $city = MaxMind::mmCity('128.101.101.101');
+        $code = MaxMind::mmCode('178.54.128.150');
 
         return view('pages.maxmind', ['country' => $country, 'city' => $city, 'code' => $code]);
     }

@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\MaxMind;
+use App\Repositories\MaxMindInterface;
+use App\Repositories\MaxMindRepository;
 use Illuminate\Support\ServiceProvider;
+use PharIo\Manifest\Application;
 
 class MaxMindServiceProvider extends ServiceProvider
 {
@@ -13,14 +17,14 @@ class MaxMindServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app()->bind('maxmind', function(){
-            return new \App\Repositories\MaxMind();
+        app()->singleton('maxmindFacade', function(){
+            return new MaxMindRepository(new MaxMind($_SERVER['DOCUMENT_ROOT'] . '/GeoLite2-City.mmdb'));
         });
     }
 
     /**
      * Bootstrap services.
-     *
+
      * @return void
      */
     public function boot()

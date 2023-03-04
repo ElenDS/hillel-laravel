@@ -6,7 +6,7 @@ class MaxMind extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'maxmind';
+        return 'maxmindFacade';
     }
 
 }

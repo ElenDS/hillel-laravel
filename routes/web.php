@@ -18,18 +18,21 @@ Route::get('/', [\App\Http\Controllers\Controller::class, 'show']);
 
 Route::get('/admin', [\App\Http\Controllers\AuthController::class, 'checkAuth']);
 
+Route::get('/maxmind', [\App\Http\Controllers\Controller::class, 'showMaxmind']);
+
 Route::prefix('admin')->group(function () {
     Route::resource('categories',\App\Http\Controllers\CategoryController::class)->middleware('auth');
     Route::resource('tags',\App\Http\Controllers\TagController::class)->middleware('auth');
     Route::resource('posts',\App\Http\Controllers\PostController::class)->middleware('auth');
+    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware('guest')->group(function(){
     Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
     Route::post('/login', [\App\Http\Controllers\AuthController::class, 'handleLogin']);
-    Route::get('/registration', [\App\Http\Controllers\AuthController::class, 'registration']);
-    Route::post('/registration', [\App\Http\Controllers\AuthController::class, 'handleRegistration']);
+    Route::get('/registration', [\App\Http\Controllers\AuthController::class, 'registration'])->name('registration');
+
 });
 
-Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
+Route::post('/registration', [\App\Http\Controllers\AuthController::class, 'handleRegistration']);

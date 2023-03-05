@@ -11,7 +11,8 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "twbs/bootstrap": "^5.2"
+        "twbs/bootstrap": "^5.2",
+        "ua-parser/uap-php": "^3.9"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

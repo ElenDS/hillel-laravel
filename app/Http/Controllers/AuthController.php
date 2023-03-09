@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegistryRequest;
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +12,16 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('pages.login');
-    }
+        $parameters = [
+            'redirect_uri'  => 'http://demo.ua/callback',
+            'response_type' => 'code',
+            'client_id'     => '941615024459-3qoa7da2d9qk8oup3fd2jjcr26kg190t.apps.googleusercontent.com',
+            'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+        ];
+        $link = 'https://accounts.google.com/o/oauth2/auth' . '?' . http_build_query($parameters);
 
+        return view('pages.login', ['link' => $link]);
+    }
     public function handleLogin(AuthRequest $request)
     {
         $credentials = $request->only('email', 'password');
@@ -25,6 +31,10 @@ class AuthController extends Controller
         }
 
         return redirect("login")->withSuccess('Login details are not valid');
+    }
+    public function handleFacebookOAuth(Request $request)
+    {
+
     }
 
     public function registration()

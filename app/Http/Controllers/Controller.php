@@ -16,7 +16,8 @@ class Controller extends BaseController
 
     public function show()
     {
-        return view('pages.index');
+        $link = 'https://api.instagram.com/oauth/authorize';
+        return view('pages.index', ['link' => $link]);
     }
 
     public function showMaxmind()

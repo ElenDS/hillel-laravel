@@ -37,6 +37,8 @@
                                     <button type="submit" class="btn btn-info text-white btn-block">Sign in</button>
                                 </div>
                             </form>
+
+                            <a class="bt btn-close-white" href="{{$link}}">Login FB</a>
                         </div>
                     </div>
                 </div>

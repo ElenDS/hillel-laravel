@@ -16,7 +16,15 @@ class Controller extends BaseController
 
     public function show()
     {
-        $link = 'https://api.instagram.com/oauth/authorize';
+        $parameters = [
+            'redirect_uri'  => env('GOOGLE_REDIRECT_URI'),
+            'response_type' => 'code',
+            'client_id'     => env('GOOGLE_CLIENT_ID'),
+            'scope'         => env('GOOGLE_SCOPES'),
+        ];
+
+        $link = env('GOOGLE_AUTH_URI') . '?' . http_build_query($parameters);
+
         return view('pages.index', ['link' => $link]);
     }
 

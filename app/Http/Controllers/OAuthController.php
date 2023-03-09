@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Services\OAuthRequestService;
 use App\Services\UserRegService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 
 class OAuthController extends Controller
 {
@@ -17,14 +16,14 @@ class OAuthController extends Controller
         $email = $userData['email'];
 
         $user = User::where('email', $email)->first();
-        if($user){
+        if ($user) {
             Auth::login($user);
         } else {
-           $user = $userRegService->newUser($email);
+            $user = $userRegService->newUser($email);
             Auth::login($user);
-
-            return redirect("/")->withSuccess('You have signed-in');
         }
+
+        return redirect("/")->withSuccess('You have signed-in');
     }
 
 }

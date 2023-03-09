@@ -38,7 +38,7 @@
                                 </div>
                             </form>
 
-                            <a class="bt btn-close-white" href="{{$link}}">Login FB</a>
+                            <a class="bt btn-secondary btn-block" href="{{$link}}">Login with Google</a>
                         </div>
                     </div>
                 </div>

@@ -182,6 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         \App\Providers\MaxMindServiceProvider::class,
+        \App\Providers\ClientRedirectServiceProvider::class,
 
         /*
          * Package Service Providers...

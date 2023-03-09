@@ -13,12 +13,13 @@ class AuthController extends Controller
     public function login()
     {
         $parameters = [
-            'redirect_uri'  => 'http://demo.ua/callback',
+            'redirect_uri'  => env('GOOGLE_REDIRECT_URI'),
             'response_type' => 'code',
-            'client_id'     => '941615024459-3qoa7da2d9qk8oup3fd2jjcr26kg190t.apps.googleusercontent.com',
-            'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+            'client_id'     => env('GOOGLE_CLIENT_ID'),
+            'scope'         => env('GOOGLE_SCOPE_email'). ' ' . env('GOOGLE_SCOPE_profile'),
         ];
-        $link = 'https://accounts.google.com/o/oauth2/auth' . '?' . http_build_query($parameters);
+
+        $link = env('GOOGLE_AUTH_URI') . '?' . http_build_query($parameters);
 
         return view('pages.login', ['link' => $link]);
     }

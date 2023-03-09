@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegistryRequest;
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +12,17 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('pages.login');
-    }
+        $parameters = [
+            'redirect_uri'  => env('GOOGLE_REDIRECT_URI'),
+            'response_type' => 'code',
+            'client_id'     => env('GOOGLE_CLIENT_ID'),
+            'scope'         => env('GOOGLE_SCOPE_email'). ' ' . env('GOOGLE_SCOPE_profile'),
+        ];
 
+        $link = env('GOOGLE_AUTH_URI') . '?' . http_build_query($parameters);
+
+        return view('pages.login', ['link' => $link]);
+    }
     public function handleLogin(AuthRequest $request)
     {
         $credentials = $request->only('email', 'password');

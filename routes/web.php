@@ -36,3 +36,5 @@ Route::middleware('guest')->group(function(){
 
 
 Route::post('/registration', [\App\Http\Controllers\AuthController::class, 'handleRegistration']);
+
+Route::get('/callback', [\App\Http\Controllers\OAuthController::class, 'callbackOAuth']);

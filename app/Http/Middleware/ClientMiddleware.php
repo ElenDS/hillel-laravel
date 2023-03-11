@@ -17,7 +17,8 @@ class ClientMiddleware
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function __construct(readonly ClientRedirectService $clientRedirectService)
-    {}
+    {
+    }
 
     public function handle(Request $request, Closure $next)
     {

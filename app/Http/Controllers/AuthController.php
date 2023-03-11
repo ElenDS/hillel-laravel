@@ -33,6 +33,10 @@ class AuthController extends Controller
 
         return redirect("login")->withSuccess('Login details are not valid');
     }
+    public function handleFacebookOAuth(Request $request)
+    {
+
+    }
 
     public function registration()
     {

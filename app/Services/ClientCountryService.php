@@ -6,10 +6,19 @@ use App\Helpers\Facades\MaxMind;
 
 class ClientCountryService
 {
-    public string $country;
+    private string $country;
 
-    public function __construct()
+    public function __construct($ip)
     {
-        $this->country = MaxMind::mmCountry($_SERVER['REMOTE_ADDR']);
+        $this->country = MaxMind::mmCountry($ip);
     }
+
+    /**
+     * @return string
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
 }

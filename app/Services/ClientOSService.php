@@ -6,11 +6,14 @@ use UAParser\Parser;
 
 class ClientOSService
 {
-    public string $os;
+    private string $os;
 
-    public function __construct()
+    public function __construct($userAgent)
     {
         $parser = Parser::create();
-        $this->os = $parser->parse($_SERVER['HTTP_USER_AGENT'])->os->family;
+        $this->os = $parser->parse($userAgent)->os->family;
+    }
+    public function getOS(){
+        return $this->os;
     }
 }

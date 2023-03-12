@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efb9518334b51688b1178a67a1a2a671",
+    "content-hash": "ff16e3ba0e21cb18a6f4f0e3707bc35d",
     "packages": [
         {
             "name": "brick/math",
@@ -508,6 +508,40 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "elends/text-analysis",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ElenDS/text-analysis.git",
+                "reference": "48ec9d45be12183982d6e9501fca559d28cba437"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ElenDS/text-analysis/zipball/48ec9d45be12183982d6e9501fca559d28cba437",
+                "reference": "48ec9d45be12183982d6e9501fca559d28cba437",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TextAnalysis\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Text analysis service",
+            "support": {
+                "issues": "https://github.com/ElenDS/text-analysis/issues",
+                "source": "https://github.com/ElenDS/text-analysis/tree/v1.1"
+            },
+            "time": "2023-03-12T16:55:31+00:00"
         },
         {
             "name": "fruitcake/php-cors",

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Services;
 
@@ -8,9 +9,17 @@ class ClientOSService
 {
     public string $os;
 
-    public function __construct()
+    public function __construct($userAgent)
     {
         $parser = Parser::create();
-        $this->os = $parser->parse($_SERVER['HTTP_USER_AGENT'])->os->family;
+        $this->os = $parser->parse($userAgent)->os->family;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOs(): string
+    {
+        return $this->os;
     }
 }

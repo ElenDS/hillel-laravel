@@ -39,7 +39,7 @@ services:
       - demo-proxy.network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.demo-nginx.rule=Host(`demo.localhost`)
+      - traefik.http.routers.demo-nginx.rule=Host(`demo.ua`)
 
   demo-redis:
     container_name: demo-redis

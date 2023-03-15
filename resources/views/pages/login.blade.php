@@ -37,6 +37,8 @@
                                     <button type="submit" class="btn btn-info text-white btn-block">Sign in</button>
                                 </div>
                             </form>
+
+                            <a class="bt btn-secondary btn-block" href="{{$link}}">Login with Google</a>
                         </div>
                     </div>
                 </div>

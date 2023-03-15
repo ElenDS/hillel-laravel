@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
+use TextAnalysis\Document;
 
 
 class PostController extends Controller
@@ -50,10 +50,19 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
+        $doc = new Document($post->text);
+        $textLength = $doc->textLength();
+        $wordNumber = $doc->wordsNumber();
 
         $categories = Category::all();
         $tags = Tag::all();
-        return view('pages.update-post', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
+        return view('pages.update-post', [
+            'post' => $post,
+            'categories' => $categories,
+            'tags' => $tags,
+            'textLength' => $textLength,
+            'wordNumber' => $wordNumber,
+            ]);
     }
 
     public function update(PostRequest $request, Post $post)

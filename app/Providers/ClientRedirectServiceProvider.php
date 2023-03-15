@@ -17,9 +17,9 @@ class ClientRedirectServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app()->singleton(ClientRedirectService::class, function ($app) {
-            return new ClientRedirectService(new ClientCountryService(), new ClientOSService());
-        });
+//        app()->singleton(ClientRedirectService::class, function ($app) {
+//            return new ClientRedirectService(new ClientCountryService(), new ClientOSService());
+//        });
     }
 
     /**

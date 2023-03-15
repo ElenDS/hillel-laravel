@@ -8,16 +8,18 @@ use App\Services\ClientOSService;
 
 class ClientRedirectService implements ClientRedirectInterface
 {
-    public function __construct(
-        readonly ClientCountryService $clientCountryService,
-        readonly ClientOSService $clientOSService
-    )
-    {}
+    private ClientCountryService $clientCountryService;
+    private ClientOSService $clientOSService;
+    public function __construct(string $ip, string $userAgent)
+    {
+        $this->clientCountryService = new ClientCountryService($ip);
+        $this->clientOSService = new ClientOSService($userAgent);
+    }
 
     public function getRedirect(): string
     {
-        $country = $this->clientCountryService->country;
-        $os = $this->clientOSService->os;
+        $country = $this->clientCountryService->getCountry();
+        $os = $this->clientOSService->getOs();
         if ($country === 'United States' && $os === 'Apply') {
             $redirect = 'amazon.com';
         } elseif ($country === 'United Kingdom' && $os === 'Ubuntu') {
@@ -36,8 +38,8 @@ class ClientRedirectService implements ClientRedirectInterface
     public function logClient()
     {
         $client = new Client();
-        $client->country = $this->clientCountryService->country;
-        $client->os = $this->clientOSService->os;
+        $client->country = $this->clientCountryService->getCountry();
+        $client->os = $this->clientOSService->getOs();
         $client->redirect = $this->getRedirect();
         $client->save();
     }

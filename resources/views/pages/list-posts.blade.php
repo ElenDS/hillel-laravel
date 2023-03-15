@@ -34,7 +34,7 @@
                 </div>
 
                     <div class="row">
-                            <div class="col-1 m-1"><img src="{{$post->image->url}}" style="width:100px;"></div>
+                            @if($post->image) <div class="col-1 m-1"><img src="{{$post->image->url}}" style="width:100px;"></div>@endif
                             <div class="col m-1"><p>{{$post->text}}</p></div>
                     </div>
 

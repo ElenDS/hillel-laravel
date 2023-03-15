@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Services;
 
@@ -8,8 +9,16 @@ class ClientCountryService
 {
     public string $country;
 
-    public function __construct()
+    public function __construct($ip)
     {
-        $this->country = MaxMind::mmCountry($_SERVER['REMOTE_ADDR']);
+        $this->country = MaxMind::mmCountry('178.54.128.150');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
     }
 }

@@ -1,25 +1,27 @@
 <?php
+namespace App\Http\Controllers;
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $categories = Category::all();
         return view('pages.list-categories', ['categories' => $categories]);
     }
 
-    public function create()
+    public function create(): View
     {
         return view('pages.create-category');
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request): RedirectResponse
     {
         $newCategory = new Category();
         $newCategory->name = $request->input('name');
@@ -30,19 +32,19 @@ class CategoryController extends Controller
         return redirect('admin/categories');
     }
 
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 
         return redirect('admin/categories');
     }
 
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         return view('pages.update-category', ['category' => $category]);
     }
 
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $category->name = $request->input('name');
         $category->save();

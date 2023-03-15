@@ -1,16 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegistryRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+
 
 class AuthController extends Controller
 {
-    public function login()
+    public function login(): View
     {
         $parameters = [
             'redirect_uri'  => env('GOOGLE_REDIRECT_URI'),
@@ -23,23 +26,22 @@ class AuthController extends Controller
 
         return view('pages.login', ['link' => $link]);
     }
-    public function handleLogin(AuthRequest $request)
+    public function handleLogin(AuthRequest $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/')
-                ->withSuccess('Signed in');
+            return redirect()->intended();
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect("login");
     }
 
-    public function registration()
+    public function registration(): View
     {
         return view('pages.registration');
     }
 
-    public function handleRegistration(RegistryRequest $request)
+    public function handleRegistration(RegistryRequest $request): RedirectResponse
     {
         $user = new User();
         $user->email = $request->input('email');
@@ -47,19 +49,19 @@ class AuthController extends Controller
 
         $user->save();
 
-        return redirect("/login")->withSuccess('You have signed-in');
+        return redirect("/login");
     }
 
-    public function checkAuth()
+    public function checkAuth(): RedirectResponse
     {
         if (Auth::check()) {
             return redirect('/admin/posts');
         }
 
-        return redirect("/login")->withSuccess('You are not allowed to access');
+        return redirect("/login");
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         session()->flush();
         Auth::logout();

@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
-use App\Services\Adapter\ClientRedirectService;
+use App\Jobs\ProcessClientTrack;
+use App\Services\ClientTrackService;
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ClientMiddleware
@@ -11,15 +15,14 @@ class ClientMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse) $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Closure $next
+     * @return RedirectResponse|mixed
      */
-      public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
-        $newClient = new ClientRedirectService($request->ip(), $request->userAgent());
-        $newClient->logClient();
-        $redirect = 'https://' . $newClient->getRedirect();
+        $track = new ClientTrackService($request->ip(), $request->userAgent());
+        ProcessClientTrack::dispatch($track);
 
         return $next($request);
     }

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Repositories\MaxMind;
-use App\Repositories\MaxMindRepository;
+use App\Jobs\ProcessClientTrack;
 use Illuminate\Support\ServiceProvider;
 
-class MaxMindServiceProvider extends ServiceProvider
+class ClientTrackServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -17,9 +16,6 @@ class MaxMindServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        app()->singleton('maxmindFacade', function () {
-            return new MaxMindRepository(new MaxMind(__DIR__ . '/../Services/GeoLite2-City.mmdb'));
-        });
     }
 
     /**
@@ -28,6 +24,8 @@ class MaxMindServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bindMethod([ProcessClientTrack::class, 'handle'], function (ProcessClientTrack $job) {
+            $job->handle();
+        });
     }
 }
